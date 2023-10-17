@@ -8,6 +8,11 @@
 <h1>Tizimdagi hamma ustozlar ro'yhati </h1>
     <br>
     <hr>
+    <form method="get">
+        <input type="text" placeholder="Ustoz ismini kiriting" name="qidirish_sozi">
+        <button>Qidirish</button>
+    </form>
+    <br>
     {% for ustoz in ustozlar %}
     <br>
     <h1>{{ustoz}}</h1>
