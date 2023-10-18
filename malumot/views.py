@@ -8,6 +8,11 @@ def homepage(request):
 
 
 def hamma_yonalishlar(request):
+    if request.method == 'POST':
+        Yonalish.objects.create(
+            nom=request.POST.get("nom"),
+            aktiv=request.POST.get("aktiv") == "on",
+        )
     content = {
         "yonalishlar": Yonalish.objects.all()
     }
