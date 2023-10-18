@@ -48,11 +48,20 @@ def fan_ochir(request, son):
 
 
 def hamma_ustozlar(request):
+    if request.method == 'POST':
+        Ustoz.objects.create(
+            ism=request.POST.get("ism"),
+            jins=request.POST.get("jins"),
+            yosh=request.POST.get("yosh"),
+            daraja=request.POST.get("daraja"),
+            fan=Fan.objects.get(id=request.POST.get("fan")),
+        )
     soz = request.GET.get("qidirish_sozi")
     natija = Ustoz.objects.all()
     if soz:
         natija = natija.filter(ism__contains=soz)
     content = {
-        "ustozlar": natija
+        "ustozlar": natija,
+        "fanlar": Fan.objects.all()
     }
     return render(request, "hamma_ustozlar.html", content)
