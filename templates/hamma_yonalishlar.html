@@ -11,7 +11,10 @@
     {% for yonalish in yonalishlar %}
     <br>
     <h1>{{yonalish}}</h1>
-   <a href="/yonalish_ochir/{{yonalish.id}}/">
+    <a href="/yonalish_update/{{yonalish.id}}/">
+        <button>Update</button>
+    </a>
+    <a href="/yonalish_ochir/{{yonalish.id}}/">
         <button>Delete</button>
     </a>
     {% endfor %}

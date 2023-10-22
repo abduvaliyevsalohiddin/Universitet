@@ -11,5 +11,7 @@ urlpatterns = [
 
     path('fan_ochir/<int:son>/', fan_ochir),
     path('yonalish_ochir/<int:son>/', yonalish_ochir),
+
     path('fan_update/<int:son>/', fan_update),
+    path('yonalish_update/<int:son>/', yonalish_update),
 ]

@@ -24,6 +24,20 @@ def yonalish_ochir(request, son):
     return redirect("/hamma_yonalishlar/")
 
 
+def yonalish_update(request, son):
+    if request.method == 'POST':
+        Yonalish.objects.filter(id=son).update(
+            nom=request.POST.get("nom"),
+            aktiv=request.POST.get("aktiv") == "on",
+        )
+        return redirect('/hamma_yonalishlar/')
+
+    content = {
+        "yonalish": Yonalish.objects.get(id=son)
+    }
+    return render(request, 'yonalish_update.html', content)
+
+
 def hamma_fanlar(request):
     if request.method == 'POST':
         Fan.objects.create(
