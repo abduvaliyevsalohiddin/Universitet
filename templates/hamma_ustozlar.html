@@ -15,7 +15,10 @@
     <br>
     {% for ustoz in ustozlar %}
     <br>
-    <h1>{{ustoz}}</h1>
+    <h1>{{ustoz.id}}.{{ustoz.ism}} ( {{ustoz.fan.nom}} )</h1>
+    <a href="/ustoz_update/{{ustoz.id}}/">
+        <button>Update</button>
+    </a>
     {% endfor %}
 
     <br>

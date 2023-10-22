@@ -60,6 +60,7 @@ def fan_ochir(request, son):
     Fan.objects.get(id=son).delete()
     return redirect("/hamma_fanlar/")
 
+
 def fan_update(request, son):
     if request.method == 'POST':
         Fan.objects.filter(id=son).update(
@@ -75,8 +76,6 @@ def fan_update(request, son):
 
     }
     return render(request, 'fan_update.html', content)
-
-
 
 
 def hamma_ustozlar(request):
@@ -97,3 +96,23 @@ def hamma_ustozlar(request):
         "fanlar": Fan.objects.all()
     }
     return render(request, "hamma_ustozlar.html", content)
+
+
+def ustoz_update(request, son):
+    if request.method == 'POST':
+        Ustoz.objects.filter(id=son).update(
+            ism=request.POST.get("ism"),
+            jins=request.POST.get("jins"),
+            yosh=request.POST.get("yosh"),
+            daraja=request.POST.get("daraja"),
+            fan=Fan.objects.get(id=request.POST.get("fan")),
+        )
+        return redirect('/hamma_ustozlar/')
+
+    content = {
+        "ustoz": Ustoz.objects.get(id=son),
+        "fanlar": Fan.objects.all(),
+        "jins": ["Erkak", "Ayol"],
+        "daraja": ["Bakalavr", "Magistr", "Professor"]
+    }
+    return render(request, 'ustoz_update.html', content)
