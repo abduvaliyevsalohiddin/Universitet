@@ -46,6 +46,24 @@ def fan_ochir(request, son):
     Fan.objects.get(id=son).delete()
     return redirect("/hamma_fanlar/")
 
+def fan_update(request, son):
+    if request.method == 'POST':
+        Fan.objects.filter(id=son).update(
+            nom=request.POST.get("nom"),
+            yonalish=Yonalish.objects.get(id=request.POST.get("yonalish")),
+            asosiy=request.POST.get("asosiy") == "on",
+        )
+        return redirect('/hamma_fanlar/')
+
+    content = {
+        "fan": Fan.objects.get(id=son),
+        "yonalishlar": Yonalish.objects.all()
+
+    }
+    return render(request, 'fan_update.html', content)
+
+
+
 
 def hamma_ustozlar(request):
     if request.method == 'POST':
