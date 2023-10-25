@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
+from .forms import *
 
 
 def homepage(request):
@@ -9,12 +10,22 @@ def homepage(request):
 
 def hamma_yonalishlar(request):
     if request.method == 'POST':
-        Yonalish.objects.create(
-            nom=request.POST.get("nom"),
-            aktiv=request.POST.get("aktiv") == "on",
-        )
+        forma = YonalishForm(request.POST)
+        if forma.is_valid():
+            data = forma.cleaned_data
+            Yonalish.objects.create(
+                nom=data.get("nom"),
+                aktiv=data.get("aktiv"),
+            )
+
+    # if request.method == 'POST':
+    #     Yonalish.objects.create(
+    #         nom=request.POST.get("nom"),
+    #         aktiv=request.POST.get("aktiv") == "on",
+    #     )
     content = {
-        "yonalishlar": Yonalish.objects.all()
+        "yonalishlar": Yonalish.objects.all(),
+        "forma": YonalishForm()
     }
     return render(request, "hamma_yonalishlar.html", content)
 
