@@ -29,22 +29,25 @@
     <br>
     <h1>Yangi fan qoshish</h1>
     <form method="post">{% csrf_token %}
-        <label>Nomi:</label>
-        <input type="text" placeholder="Nomini yozing" name="nom">
-        <br>
-        <br>
-        <label>Yonalish:</label>
-        <select name="yonalish" >
-            {% for yonalish in yonalishlar %}
-            <option value="{{yonalish.id}}">{{yonalish.nom}}</option>
-            {% endfor %}
-        </select>
-        <br>
-        <br>
-        <label>Asosiy</label>
-        <input type="checkbox" name="asosiy">
-        <br>
-        <br>
+        {{ forma.as_p }}
+
+
+<!--        <label>Nomi:</label>-->
+<!--        <input type="text" placeholder="Nomini yozing" name="nom">-->
+<!--        <br>-->
+<!--        <br>-->
+<!--        <label>Yonalish:</label>-->
+<!--        <select name="yonalish" >-->
+<!--            {% for yonalish in yonalishlar %}-->
+<!--            <option value="{{yonalish.id}}">{{yonalish.nom}}</option>-->
+<!--            {% endfor %}-->
+<!--        </select>-->
+<!--        <br>-->
+<!--        <br>-->
+<!--        <label>Asosiy</label>-->
+<!--        <input type="checkbox" name="asosiy">-->
+<!--        <br>-->
+<!--        <br>-->
         <label>Qo'shish:</label>
         <button>Qo'shish</button>
     </form>

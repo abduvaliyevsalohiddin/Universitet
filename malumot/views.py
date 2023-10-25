@@ -51,18 +51,25 @@ def yonalish_update(request, son):
 
 def hamma_fanlar(request):
     if request.method == 'POST':
-        Fan.objects.create(
-            nom=request.POST.get("nom"),
-            yonalish=Yonalish.objects.get(id=request.POST.get("yonalish")),
-            asosiy=request.POST.get("asosiy") == "on",
-        )
+        forma = FanForm(request.POST)
+        if forma.is_valid():
+            forma.save()
+
+
+    # if request.method == 'POST':
+    #     Fan.objects.create(
+    #         nom=request.POST.get("nom"),
+    #         yonalish=Yonalish.objects.get(id=request.POST.get("yonalish")),
+    #         asosiy=request.POST.get("asosiy") == "on",
+    #     )
     soz = request.GET.get("qidirish_sozi")
     natija = Fan.objects.all()
     if soz:
         natija = natija.filter(nom__contains=soz)
     content = {
         "fanlar": natija,
-        "yonalishlar": Yonalish.objects.all()
+        "yonalishlar": Yonalish.objects.all(),
+        "forma":FanForm()
     }
     return render(request, "hamma_fanlar.html", content)
 
