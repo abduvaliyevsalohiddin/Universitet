@@ -10,6 +10,7 @@ class UstozAdmin(admin.ModelAdmin):
     search_fields = ["ism"]
     search_help_text = "Ism ustunlari bo'yicha qidiring"
 
+
 @admin.register(Yonalish)
 class YonalishAdmin(admin.ModelAdmin):
     list_display = ["id", "nom", "aktiv"]
@@ -19,6 +20,14 @@ class YonalishAdmin(admin.ModelAdmin):
     list_filter = ["aktiv"]
 
 
+@admin.register(Fan)
+class FanAdmin(admin.ModelAdmin):
+    list_display = ["id", "nom", "yonalish", "asosiy"]
+    list_display_links = ["id", "nom"]
+    search_fields = ["nom"]
+    search_help_text = "Nom ustunlari bo'yicha qidiring"
+    list_filter = ["asosiy", "yonalish"]
+
 # admin.site.register(Yonalish)
-admin.site.register(Fan)
+# admin.site.register(Fan)
 # admin.site.register(Ustoz)
