@@ -98,20 +98,26 @@ def fan_update(request, son):
 
 def hamma_ustozlar(request):
     if request.method == 'POST':
-        Ustoz.objects.create(
-            ism=request.POST.get("ism"),
-            jins=request.POST.get("jins"),
-            yosh=request.POST.get("yosh"),
-            daraja=request.POST.get("daraja"),
-            fan=Fan.objects.get(id=request.POST.get("fan")),
-        )
+        forma = UstozForm(request.POST)
+        if forma.is_valid():
+            forma.save()
+
+    # if request.method == 'POST':
+    #     Ustoz.objects.create(
+    #         ism=request.POST.get("ism"),
+    #         jins=request.POST.get("jins"),
+    #         yosh=request.POST.get("yosh"),
+    #         daraja=request.POST.get("daraja"),
+    #         fan=Fan.objects.get(id=request.POST.get("fan")),
+    #     )
     soz = request.GET.get("qidirish_sozi")
     natija = Ustoz.objects.all()
     if soz:
         natija = natija.filter(ism__contains=soz)
     content = {
         "ustozlar": natija,
-        "fanlar": Fan.objects.all()
+        "fanlar": Fan.objects.all(),
+        "forma": UstozForm()
     }
     return render(request, "hamma_ustozlar.html", content)
 
